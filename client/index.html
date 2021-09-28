@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+        <title>Game</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel='stylesheet' type='text/css' href='/client/class.css'>
+    </head>
+    <body>
+
+
+        <div id="navbar" class="pos-f-t">
+            <div class="collapse" id="navbarToggleExternalContent">
+              <div class="p-4" style="background-color: grey;">
+                <ul class="navbar-nav text-white">
+                    <li class="nav-item active">
+                        <a class="nav-link" onclick="play()">Play <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="instructions()">How to Play</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="about()">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Logout
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" onclick="logout()">Confirm</a>
+                        </div>
+                    </li>
+                </ul>
+              </div>
+            </div>
+            <nav class="navbar navbar-dark" style="background-color: grey;">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h4 class="text-white">Ultimate Tic Tac Toe</h4>
+            </nav>
+        </div>
+
+        <div id='overlay' class='overlay row'>
+
+            <form id='logon' autocomplete='off' class='overlay-content col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-12 col-xs-12' action='http://127.0.0.1:8080'>
+                <div class='form-group'>
+                    <label>Username:</label>
+                    <input id='username' type="text" class='form-control' placeholder='Enter username'>
+                    <label>Password:</label>
+                    <input id='password' type="password" class='form-control' placeholder='Enter password'>
+                </div>
+                <div id='logonNote' style='margin: 5%'></div>
+                <button class='btn btn-default btn-md' type='submit'>Submit</button>
+            </form>
+
+            <a id='showRForm' class='btn btn-default btn-sm overlay-content' onclick='openR()'>Not registered? Join here!</a>
+        </div>
+
+        <div id='overlayR' class='overlayR row'>
+
+            <form id='register' autocomplete='off' class='overlay-content col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-12 col-xs-12' action='http://127.0.0.1:8080'>
+                <div class='form-group'>
+                    <label>Forename:</label>
+                    <input id='forenameR' type="text" class='form-control' placeholder='Enter forename'>
+                    <label>Surname:</label>
+                    <input id='surnameR' type="text" class='form-control' placeholder='Enter surname'>
+                    <label>Username:</label>
+                    <input id='usernameR' type="text" class='form-control' placeholder='Enter username'>
+                    <label>Password:</label>
+                    <input id='passwordR' type="password" class='form-control' placeholder='Enter password'>
+                </div>
+                <div id='registrationNote' style='margin: 5%'></div>
+                <button class='btn btn-default btn-md' type='submit'>Submit</button>
+                <button class='btn btn-default btn-md' type='reset' onclick='cancelR()'>Cancel</button>
+            </form>
+
+        </div>
+
+
+
+        <div class='container' id="play">
+
+            <div id='offline' class='overlayOffline row'>
+                <div class='overlay-content text-center'>
+                    <a href='' class='btn btn-light'>Please logon again to play.</a>
+                </div>
+            </div>
+
+
+			<div id='away' class='overlayAway row'>
+                <div class='overlay-content text-center'>
+                    <button onclick='here()' class='btn btn-light'>Still Here?</button>
+                </div>
+            </div>
+
+
+            <div id='playeroverlay' class='playeroverlay row'>
+                <div class='overlay-content'>
+                    <h2 style='margin: 10px' id='pname'></h2>
+                    <h4 style='margin: 10px' id='pwins'></h4>
+                    <h4 style='margin: 10px' id='pplayed'></h4>
+                    <div style='margin: 20px' id='invite'></div>
+                </div>
+            </div>
+
+            <div id='inviteoverlay' class='playeroverlay row'>
+                <div class='overlay-content panel panel-default'>
+                    <h2 id='inviter'></h2>
+                    <div>has invited you to play.</div>
+                    <button class='btn btn-default btn-md' onclick='accept(1)'>Accept</button>
+                    <button class='btn btn-default btn-md' onclick='accept(0)'>Decline</button>
+                </div>
+            </div>
+
+
+            <div class='row align-items-center'>
+
+
+                <div class='col'>
+                    <div id='nameDisplay'></div>
+                    <div id='stats'></div>
+                </div>
+
+
+                <div class='col text-right'>
+                    <div id='player2'></div>
+                    <div id='search'>
+                        <button id='searchButton' class='btn btn-default btn-lg' onclick='startSearch()'>Find a Game</button>
+                    </div>
+                    <div id='searching'>
+                      <h4>Searching...</h4>
+                      <button id='cancelSearch' class='btn btn-default btn-lg' onclick='cancelSearch()'>Cancel</button>
+                    </div>
+
+                    <div id='invited'>
+                        <h2 id='invitee'></h2>
+                        <h4 class='float-right'>has been invited.</h4>
+                        <div><button class='btn btn-default btn-sm' onclick='cancelInvite()'>Cancel Invite</button></div>
+                    </div>
+
+                    <div id='ready'>
+                        <button class='btn btn-default btn-lg' onclick='ready()'>Ready!</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class='row'>
+                <div class='col-12'>
+                    <canvas id='background'></canvas>
+                    <canvas id='canvas'></canvas>
+                    <canvas id='light'></canvas>
+                </div>
+                <div style='margin: auto' id='forfeit' class='text-center col-12'>
+                    <input type="button" id='forfeitButton' value='Forfeit' class='btn btn-default' onclick='forfeit()'/>
+                    <div id="forfeitConfirm">Are you sure?
+                        <input type="button" value='Yes' class='btn btn-default' style='margin-bottom: 10px' onclick='forfeit()'/>
+                        <input type="button" value='No' class='btn btn-default' style='margin-bottom: 10px' onclick='cancelForfeit()'/>
+                    </div>
+                </div>
+                <div style='margin: auto' class='text-center col-12'>
+                    <h3 class='text-center' id='result'></h3>
+                    <button id='home' class='btn btn-default btn-md' style='margin-bottom: 10px' onclick='home()'>Return to Menu</button>
+                </div>
+            </div>
+
+
+            <div class='row'>
+
+
+                <div class='col-lg-3 col-md-3 col-sm-12 col-xs-12 panel panel-default'>
+                    <h5>Players</h5>
+                    <div id='onlineplayers' class='pre-scrollable dropdown'></div>
+                    <button class='btn btn-default btn-md' onclick='refreshPlayers()'>Refresh</button>
+                </div>
+
+
+                <div id='chat' class='col-lg-8 col-md-8 col-sm-12 col-xs-12 panel panel-default'>
+                    <h5>Chat</h5>
+                    <div id='worldchat' class='pre-scrollable'></div>
+                    <div>
+                        <form id='msgbox' autocomplete='off' action='http://127.0.0.1:8080'>
+                            <div class='input-group'>
+                                <input id='msg' class='form-control'/>
+                                <span class='input-group-btn'>
+                                    <button class='btn btn-default btn-md' type='submit'>Submit</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="instructions" class="container">
+            <h2>How to Play</h2>
+            <p>Click on any small box to make a move.</p>
+            <p>You are only allowed to make a move in the lit-up boxes.</p>
+            <p>Lit up boxes are determined by where the last move occured.</p>
+            <p>For example, if a move was made in the top left box of a smaller grid, the next move can only be made in the top left box of the big grid, etc.</p>
+            <p>If a move sends you to a completed box, you are free to choose any box of the larger grid to play in.</p>
+            <p>Win by winning 3 boxes in a line.</p>
+        </div>
+
+        <div id="about" class="container">
+            <h2>About</h2>
+            <p>This is a coursework project for the Web Programming module at Durham University in 2019-2020.</p>
+            <p>Produced by Andre Hui</p>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src='/client/index.js'></script>
+    </body>
+</html>

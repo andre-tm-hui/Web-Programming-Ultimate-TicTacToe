@@ -1,0 +1,227 @@
+
+
+#light{
+    position: absolute;
+}
+
+.btn{
+    background-color: grey;
+    color: white;
+}
+
+.panel-default{
+    background-color: lightgrey;
+    padding: 3%;
+    border-radius: 2%;
+    margin: auto;
+    margin-bottom: 3%;
+}
+
+.overlay{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 1s;
+    margin: 0%;
+    display: block;
+}
+
+.overlayOffline{
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(200,200,200,0.6);
+    overflow-x: hidden;
+    margin: 0%;
+    display: block;
+}
+
+.overlayAway{
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(200,200,200,0.6);
+    overflow-x: hidden;
+    margin: 0%;
+    display: block;
+}
+
+.overlayR{
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 1s;
+    margin: 0%;
+    display: block;
+}
+
+.playeroverlay{
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.8);
+    overflow-x: hidden;
+    margin: 0%;
+    display: block;
+    transition: 1s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+  
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+.btn-light{
+    font-size: 36px;
+    color: black;
+    background: rgba(255,255,255,0.8);
+    border-color: rgba(255,255,255,0.8);
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+small {
+    font-size: 12px;
+    padding: 0px;
+    margin: 1px;
+    border: 0px;
+}
+
+.pre-scrollable {
+    height: 250px;
+    width: auto;
+}
+
+.chat0 {
+    background-color: lightgrey;
+    padding: 3px;
+    padding-top: 0px;
+    border-radius: 3px;
+}
+
+.chat1{
+    background-color: white;
+    padding: 3px;
+    padding-top: 0px;
+    border-radius: 3px;
+}
+.dropdown-item{
+    text-align: center;
+}
+.dropright{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-link{
+    cursor: pointer;
+}
+
+
+#play{
+    display: none;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 0%;
+    padding: 10%;
+    padding-top: 5%;
+    text-align: left;
+}
+
+body{
+    text-align: center;
+    margin: auto;
+}
+
+
+#about{
+    display: none;
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
+
+#instructions{
+    display: none;
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
+
+#navbar{
+    display: none;
+    text-align: left;
+}
+
+#background{
+    width: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+}
+
+#canvas{
+    width: 100%;
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#light{
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
